@@ -3,24 +3,60 @@ const ProductCategory = () => {
         .then(res => res.json())
         .then(data => DisplayCategoryBtn(data))
 }
+const loadcategory = () => {
+    fetch('https://fakestoreapi.com/products')
+        .then(res => res.json())
+        .then(data => displayAllProcuct(data))
+}
+const displayAllProcuct = (products) => {
+    // console.log(products);
+    const AllProductContainer = document.getElementById('Product-Container');
+    AllProductContainer.innerHTML = '';
+    products.forEach(product => {
+        console.log(product);
+        const prodiv = document.createElement('prodiv');
+        prodiv.innerHTML = ` <div class="shadow border-gray-100 rounded-lg md:max-h-full pb-4
+">
+           <div class="bg-gray-300 md:w-full rounded-t-lg"> <img class="md:h-[200px] items-center mx-auto md:p-4" src="${product.image}" alt=""></div>
+               <div class="m-4">
+                 <div class="flex justify-between items-between">
+                    <span class="bg-sky-100 px-1 text-primary font-bold text-sm rounded-full">${product.category}</span>
+                    <div class="font-bold">
+                        <i class="fa-solid fa-star text-yellow-400"></i>
+                    <span>${product.rating.rate}</span>
+                    </div>
+                </div>
+                <p class="font-bold text-xl my-2">${product.title}</p>
+                <h2 class="font-bold">$${product.price}</h2>
+                <div class="flex items-center pt-4 justify-between">
+                    <button class="btn btn-active">Default</button>
+                    <button class="btn btn-active btn-primary">Primary</button>
+                </div>
+               </div>
+        </div>`;
+
+        AllProductContainer.append(prodiv)
+    });
+}
 const DisplayCategoryBtn = (categories) => {
-    console.log(categories);
+    // console.log(categories);
     const ProductCategory = document.getElementById('products-container');
     ProductCategory.innerHTML = '';
     const allDiv = document.createElement('div');
     allDiv.innerHTML = `
-    <button class="category-btn active flex justify-center gap-4 btn btn-neutral btn-outline rounded-full">
+    <button onclick="loadcategory()" class="category-btn active font-bold md:flex justify-center gap-4 btn btn-neutral btn-outline rounded-full">
       All
     </button>
   `;
     ProductCategory.append(allDiv);
 
     categories.forEach(categori => {
-        console.log(categori)
+        // console.log(categori)
         const div = document.createElement('div');
-        div.innerHTML = `<button class=" btn btn-neutral btn-outline rounded-full">${categori}</button>`;
+        div.innerHTML = `<button class="font-bold btn btn-neutral btn-outline rounded-full">${categori}</button>`;
 
         ProductCategory.append(div)
     });
 }
+
 ProductCategory();
