@@ -1,3 +1,4 @@
+
 const ProductCategory = () => {
     fetch('https://fakestoreapi.com/products/categories')
         .then(res => res.json())
@@ -17,7 +18,7 @@ const DisplayCategorySection=(categoriesSection)=>{
     const SetcionContainer=document.getElementById('setcion-container')
     SetcionContainer.innerHTML="";
     categoriesSection.forEach(cateSection => {
-        console.log(cateSection);
+        // console.log(cateSection);
         const DivCard =document.createElement('DivCard');
         DivCard.innerHTML=` <div class="shadow border-gray-100 rounded-lg md:max-h-full pb-4
 ">
@@ -46,7 +47,7 @@ const DisplayCategorySection=(categoriesSection)=>{
 const displayAllProcuct = (products) => {
     // console.log(products);
     const AllProductContainer = document.getElementById('Product-Container');
-    AllProductContainer.innerHTML = '';
+    AllProductContainer.innerHTML ='';
     products.forEach(product => {
         // console.log(product);
         const prodiv = document.createElement('prodiv');
@@ -95,6 +96,7 @@ const DisplayCategoryBtn = (categories) => {
             "font-bold btn btn-neutral btn-outline rounded-full";
 
         button.addEventListener("click", () => {
+            
             loadCategorySection(categori);
         });
 
